@@ -19,10 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.BackendPoke.BackendPoke.api.model.Pokemon;
 import com.BackendPoke.BackendPoke.repository.PokemonRepository;
 
-
 @RestController
 public class PokemonController {
-    
+
     @Autowired
     private final PokemonRepository pokemonRepository;
 
@@ -45,7 +44,6 @@ public class PokemonController {
         return ResponseEntity.ok().body(pokemons);
     }
 
-
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping("/pokemon")
     public Pokemon creatPokemon(@RequestBody Pokemon pokemon) {
@@ -60,14 +58,11 @@ public class PokemonController {
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @DeleteMapping("/pokemon")
-   public ResponseEntity<String> deletePokemon(@RequestParam("pokemonId") int pokemonId) {
+    public ResponseEntity<String> deletePokemon(@RequestParam("pokemonId") int pokemonId) {
         System.out.println("delete: " + pokemonId);
-        
-        pokemonRepository.deletePokemon(pokemonId);
-        // pokemonRepository.deleteById(pokemonId);
-        
 
-        
+        pokemonRepository.deletePokemon(pokemonId);
+
         String response = "{\"message\": \"Deleted:\", \"id\": " + pokemonId + "}";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -77,7 +72,7 @@ public class PokemonController {
     public ResponseEntity<?> notice(@RequestParam("pokemonId") int pokemonId, @RequestBody Pokemon updatedpokemon) {
         System.out.println("Notis: " + pokemonId);
         Optional<Pokemon> optionalPokemon = pokemonRepository.findByPokemonId(pokemonId);
-        if(optionalPokemon.isPresent()) {
+        if (optionalPokemon.isPresent()) {
             Pokemon changeNotice = optionalPokemon.get();
             changeNotice.setNotice(updatedpokemon.getNotice());
             pokemonRepository.save(changeNotice);
@@ -85,6 +80,6 @@ public class PokemonController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Fel"));
         }
-        
-    }    
+
+    }
 }

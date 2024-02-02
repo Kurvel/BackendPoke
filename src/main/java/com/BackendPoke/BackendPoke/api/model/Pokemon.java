@@ -1,6 +1,5 @@
 package com.BackendPoke.BackendPoke.api.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,7 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Pokemon {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,7 +15,8 @@ public class Pokemon {
     private int pokemonId;
     private String notice;
 
-    public Pokemon() {}
+    public Pokemon() {
+    }
 
     public Pokemon(int id) {
         this.id = id;
@@ -46,5 +46,4 @@ public class Pokemon {
         this.pokemonId = pokemonId;
     }
 
-    
 }
