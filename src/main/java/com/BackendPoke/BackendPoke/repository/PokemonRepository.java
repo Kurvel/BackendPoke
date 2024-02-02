@@ -1,6 +1,5 @@
 package com.BackendPoke.BackendPoke.repository;
 
-
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,7 +11,7 @@ import com.BackendPoke.BackendPoke.api.model.Pokemon;
 import jakarta.transaction.Transactional;
 
 public interface PokemonRepository extends CrudRepository<Pokemon, Integer> {
-    
+
     @Transactional
     @Modifying
     @Query("DELETE FROM Pokemon p WHERE p.pokemonId = ?1")
